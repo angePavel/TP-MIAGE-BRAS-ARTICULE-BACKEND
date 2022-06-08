@@ -364,7 +364,7 @@ public class Controleur {
                 controleur.depiler( moteurRotation, moteurBras, moteurP, capteurRotation, capteurBras, p, a, b );
                 break;
             case 3:
-                logger.info( "connexion interrompue" );
+                logger.info( "connexion interrompues" );
                 objetA.close();
                 objetB.close();
                 pile.close();
