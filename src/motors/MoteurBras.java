@@ -12,7 +12,7 @@ import lejos.hardware.port.Port;
  *         Matthias & PERRET Pierre-Yves
  * @version 2.1
  */
-public class Moteur extends EV3LargeRegulatedMotor {
+public class MoteurBras extends EV3LargeRegulatedMotor {
 
     public int positionActuelle;
     public int angleMax;
@@ -23,7 +23,7 @@ public class Moteur extends EV3LargeRegulatedMotor {
      * @param port
      *            Port sur lequel le moteur est connecté à la brique EV3.
      */
-    public Moteur( Port port, int angleMax ) {
+    public MoteurBras( Port port, int angleMax ) {
         super( port );
         // TODO Auto-generated constructor stub
         this.positionActuelle = 0;
