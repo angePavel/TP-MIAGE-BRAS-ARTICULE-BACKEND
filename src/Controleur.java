@@ -9,12 +9,15 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import captors.CapteurContact;
 import lejos.hardware.Bluetooth;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.remote.nxt.BTConnection;
 import lejos.remote.nxt.BTConnector;
 import lejos.remote.nxt.NXTConnection;
+import motors.*;
+
 
 /**
  * Classe Controleur
@@ -70,7 +73,7 @@ public class Controleur {
      * @param cb
      *            Le capteur du bras
      */
-    public void initialisation( Moteur mr, Moteur mb, MoteurPince mp, Capteur cr, Capteur cb ) {
+    public void initialisation( Moteur mr, Moteur mb, MoteurPince mp, CapteurContact cr, CapteurContact cb ) {
         mb.initialisationBras( cb );
         mr.initialisationRotation( cr );
         mp.initialisationPince();
@@ -132,7 +135,8 @@ public class Controleur {
      * @param positionB
      *            Position de l'objet B
      */
-    public void inverserObjets( Moteur mr, Moteur mb, MoteurPince mp, Capteur cr, Capteur cb, int positionA,
+    public void inverserObjets( Moteur mr, Moteur mb, MoteurPince mp, CapteurContact cr, CapteurContact cb,
+            int positionA,
             int positionB ) {
         int tmp = genererInt( 0, mr.angleMax );
         if ( positionA >= 0 && positionA <= mr.angleMax && positionB >= 0 && positionB <= mr.angleMax ) {
@@ -210,7 +214,8 @@ public class Controleur {
      * @param positionB
      *            Future position de l'objet se trouvant à la base de la pile
      */
-    public void depiler( Moteur mr, Moteur mb, MoteurPince mp, Capteur cr, Capteur cb, int positionPile, int positionA,
+    public void depiler( Moteur mr, Moteur mb, MoteurPince mp, CapteurContact cr, CapteurContact cb, int positionPile,
+            int positionA,
             int positionB ) {
         if ( positionA >= 0 && positionA <= mr.angleMax && positionB >= 0 && positionB <= mr.angleMax
                 && positionPile >= 0 && positionPile <= mr.angleMax ) {
@@ -265,8 +270,8 @@ public class Controleur {
 
     public static void main( String[] args ) throws IOException, InterruptedException, SocketException {
         Controleur controleur = new Controleur();
-        Capteur capteurRotation = new Capteur( SensorPort.S1 );
-        Capteur capteurBras = new Capteur( SensorPort.S3 );
+        CapteurContact capteurRotation = new CapteurContact( SensorPort.S1 );
+        CapteurContact capteurBras = new CapteurContact( SensorPort.S3 );
         Moteur moteurBras = new Moteur( MotorPort.B, 270 );
         Moteur moteurRotation = new Moteur( MotorPort.C, 615 );
         MoteurPince moteurP = new MoteurPince( MotorPort.A );

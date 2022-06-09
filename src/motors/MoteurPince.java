@@ -1,3 +1,4 @@
+package motors;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.Port;
 
