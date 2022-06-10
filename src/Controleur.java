@@ -16,8 +16,8 @@ import lejos.hardware.port.SensorPort;
 import lejos.remote.nxt.BTConnection;
 import lejos.remote.nxt.BTConnector;
 import lejos.remote.nxt.NXTConnection;
-import motors.*;
-
+import motors.MoteurBras;
+import motors.MoteurPince;
 
 /**
  * Classe Controleur
@@ -214,7 +214,8 @@ public class Controleur {
      * @param positionB
      *            Future position de l'objet se trouvant à la base de la pile
      */
-    public void depiler( MoteurBras mr, MoteurBras mb, MoteurPince mp, CapteurContact cr, CapteurContact cb, int positionPile,
+    public void depiler( MoteurBras mr, MoteurBras mb, MoteurPince mp, CapteurContact cr, CapteurContact cb,
+            int positionPile,
             int positionA,
             int positionB ) {
         if ( positionA >= 0 && positionA <= mr.angleMax && positionB >= 0 && positionB <= mr.angleMax
@@ -287,8 +288,6 @@ public class Controleur {
         int p = -1;
         int a = -1;
         int b = -1;
-        boolean ok = false;
-
         while ( connexion ) {
 
             line = donneeEntree.readByte();

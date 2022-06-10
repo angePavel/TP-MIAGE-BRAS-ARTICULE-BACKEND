@@ -12,10 +12,11 @@ import lejos.hardware.port.Port;
  *         Matthias & PERRET Pierre-Yves
  * @version 2.1
  */
-public class MoteurBras extends EV3LargeRegulatedMotor {
+public class MoteurBras {
 
-    public int positionActuelle;
-    public int angleMax;
+    public int                     positionActuelle;
+    public int                     angleMax;
+    private EV3LargeRegulatedMotor motor;
 
     /**
      * Constructeur pour le moteur (Rotation ou Bras)
@@ -24,11 +25,10 @@ public class MoteurBras extends EV3LargeRegulatedMotor {
      *            Port sur lequel le moteur est connecté à la brique EV3.
      */
     public MoteurBras( Port port, int angleMax ) {
-        super( port );
-        // TODO Auto-generated constructor stub
+        this.motor = this.getMotor( port );
         this.positionActuelle = 0;
         this.angleMax = angleMax;
-        this.setSpeed( 100 );
+        this.motor.setSpeed( 100 );
     }
 
     /**
@@ -79,13 +79,13 @@ public class MoteurBras extends EV3LargeRegulatedMotor {
      */
     public void initialisationRotation( CapteurContact capteur ) {
         try {
-            this.setSpeed( 200 );
+            this.motor.setSpeed( 200 );
             boolean enfonce = false;
             if ( capteur.contact() == false ) {
                 while ( enfonce == false ) {
-                    this.forward();
+                    this.motor.forward();
                     if ( capteur.contact() == true ) {
-                        this.stop();
+                        this.motor.stop();
                         enfonce = true;
                         // System.out.println("Le moteur de rotation est
                         // initialisé");
@@ -110,9 +110,9 @@ public class MoteurBras extends EV3LargeRegulatedMotor {
             boolean enfonce = false;
             if ( capteur.contact() == false ) {
                 while ( enfonce == false ) {
-                    this.backward();
+                    this.motor.backward();
                     if ( capteur.contact() == true ) {
-                        this.stop();
+                        this.motor.stop();
                         enfonce = true;
                         // System.out.println("Le moteur du bras est
                         // initialisé");
@@ -136,22 +136,22 @@ public class MoteurBras extends EV3LargeRegulatedMotor {
     public void pivoter( int angle ) {
         if ( angle >= 0 ) {
             if ( angle + this.positionActuelle <= this.angleMax ) {
-                this.rotate( -angle );
+                this.motor.rotate( -angle );
                 this.positionActuelle = this.positionActuelle + angle;
                 // System.out.println(this.positionActuelle);
             } else {
-                this.rotate( -( this.angleMax - this.positionActuelle ) );
+                this.motor.rotate( -( this.angleMax - this.positionActuelle ) );
                 // System.out.println("Angle trop grand");
                 this.positionActuelle = this.positionActuelle + this.angleMax - this.positionActuelle;
                 // System.out.println(this.positionActuelle);
             }
         } else {
             if ( this.positionActuelle + angle >= 0 ) {
-                this.rotate( -angle );
+                this.motor.rotate( -angle );
                 this.positionActuelle = this.positionActuelle + angle;
                 // System.out.println(this.positionActuelle);
             } else {
-                this.rotate( this.positionActuelle );
+                this.motor.rotate( this.positionActuelle );
                 this.positionActuelle = this.positionActuelle - this.positionActuelle;
                 // System.out.println("Angle trop grand 2");
                 // System.out.println(this.positionActuelle);
@@ -169,10 +169,10 @@ public class MoteurBras extends EV3LargeRegulatedMotor {
      */
     public void baisserBras( int angle ) {
         if ( angle > this.angleMax - this.positionActuelle ) {
-            this.rotate( this.angleMax - this.positionActuelle );
+            this.motor.rotate( this.angleMax - this.positionActuelle );
             this.positionActuelle = this.angleMax;
         } else {
-            this.rotate( angle );
+            this.motor.rotate( angle );
             this.positionActuelle = this.positionActuelle + angle;
         }
     }
@@ -188,12 +188,15 @@ public class MoteurBras extends EV3LargeRegulatedMotor {
      */
     public void leverBras( int angle ) {
         if ( angle > this.positionActuelle ) {
-            this.rotate( this.positionActuelle );
+            this.motor.rotate( this.positionActuelle );
             this.positionActuelle = 0;
         } else {
-            this.rotate( -angle );
+            this.motor.rotate( -angle );
             this.positionActuelle = this.positionActuelle - angle;
         }
     }
 
+    public EV3LargeRegulatedMotor getMotor( Port port ) {
+        return new EV3LargeRegulatedMotor( port );
+    }
 }

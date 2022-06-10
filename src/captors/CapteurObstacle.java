@@ -4,29 +4,34 @@ import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
 
-public class CapteurObstacle extends EV3UltrasonicSensor {
+public class CapteurObstacle {
 
-    private final double DISTANCE_OBSTACLE = 0.20;
+    private EV3UltrasonicSensor sensor;
 
     public CapteurObstacle( Port port ) {
-        super( port );
+
+        sensor = this.getSensor( port );
 
     }
 
-    private boolean obstacleDetected() {
-        boolean touche = false;
-        SampleProvider sampleProvider = this.getDistanceMode();
+    public boolean obstacleDetected() {
+
+        double DISTANCE_OBSTACLE = 0.20;
+        return this.isObstacleDetected() < DISTANCE_OBSTACLE;
+
+    }
+
+    public float isObstacleDetected() {
+        SampleProvider sampleProvider = this.sensor.getDistanceMode();
 
         float[] sample = new float[sampleProvider.sampleSize()];
         int offsetSample = 0;
 
-        this.fetchSample( sample, offsetSample );
-        float distanceObjet = (float) sample[0];
+        this.sensor.fetchSample( sample, offsetSample );
+        return (float) sample[0];
+    }
 
-        if ( distanceObjet < DISTANCE_OBSTACLE ) {
-            touche = true;
-        }
-        return touche;
-
+    public EV3UltrasonicSensor getSensor( Port port ) {
+        return new EV3UltrasonicSensor( port );
     }
 }

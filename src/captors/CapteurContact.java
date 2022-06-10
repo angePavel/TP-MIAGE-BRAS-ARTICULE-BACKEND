@@ -3,7 +3,9 @@ package captors;
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3TouchSensor;
 
-public class CapteurContact extends EV3TouchSensor {
+public class CapteurContact {
+
+    EV3TouchSensor sensor;
 
     /**
      * Constructeur pour le capteur de contact
@@ -12,7 +14,7 @@ public class CapteurContact extends EV3TouchSensor {
      *            Port sur lequel le le capteur est connecté à la brique EV3
      */
     public CapteurContact( Port port ) {
-        super( port );
+        sensor = this.getSensor( port );
         // TODO Auto-generated constructor stub
     }
 
@@ -21,15 +23,19 @@ public class CapteurContact extends EV3TouchSensor {
      * retourne faux s'il n'est pas enfoncé.
      */
     public boolean contact() {
-        boolean res = false;
-        float etat = 0;
-        float[] tab = { 0, 1 };
-        this.fetchSample( tab, 0 );
-        etat = tab[0];
-        if ( etat == 1 ) {
-            res = true;
-        }
-        return res;
+
+        return this.enContact() == 1;
     }
 
+    public float enContact() {
+
+        float[] tab = { 0, 1 };
+        this.sensor.fetchSample( tab, 0 );
+        return tab[0];
+
+    }
+
+    public EV3TouchSensor getSensor( Port port ) {
+        return new EV3TouchSensor( port );
+    }
 }
