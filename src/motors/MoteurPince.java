@@ -13,9 +13,9 @@ import lejos.hardware.port.Port;
  */
 public class MoteurPince {
 
-    public EnumEtatPince            etat;
-    public int                      position;
-    private EV3MediumRegulatedMotor motor;
+    public EnumEtatPince           etat;
+    public int                     position;
+    public EV3MediumRegulatedMotor motor;
 
     /**
      * Constructeur pour le moteur de la pince
@@ -65,7 +65,7 @@ public class MoteurPince {
         }
     }
 
-    private EV3MediumRegulatedMotor getMotor( Port port ) {
+    public EV3MediumRegulatedMotor getMotor( Port port ) {
 
         return new EV3MediumRegulatedMotor( port );
     }
