@@ -14,9 +14,9 @@ import lejos.hardware.port.Port;
  */
 public class MoteurBras {
 
-    public int                     positionActuelle;
-    public int                     angleMax;
-    private EV3LargeRegulatedMotor motor;
+    public int                    positionActuelle;
+    public int                    angleMax;
+    public EV3LargeRegulatedMotor motor;
 
     /**
      * Constructeur pour le moteur (Rotation ou Bras)
@@ -25,7 +25,7 @@ public class MoteurBras {
      *            Port sur lequel le moteur est connecté à la brique EV3.
      */
     public MoteurBras( Port port, int angleMax ) {
-        this.motor = this.getMotor( port );
+        this.motor = new EV3LargeRegulatedMotor( port );
         this.positionActuelle = 0;
         this.angleMax = angleMax;
         this.motor.setSpeed( 100 );
@@ -194,9 +194,5 @@ public class MoteurBras {
             this.motor.rotate( -angle );
             this.positionActuelle = this.positionActuelle - angle;
         }
-    }
-
-    public EV3LargeRegulatedMotor getMotor( Port port ) {
-        return new EV3LargeRegulatedMotor( port );
     }
 }
