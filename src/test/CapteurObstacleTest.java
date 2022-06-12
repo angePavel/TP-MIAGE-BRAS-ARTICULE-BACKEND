@@ -13,6 +13,11 @@ import captors.CapteurObstacle;
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 
+/**
+ * @author M1 MIAGE Alternance : Ange-pavel ISHIMWE, MEUNIER Matthias, Florette
+ *         DIEU, Gaëtan PELLERIN , Liam RIGBY
+ * @version 2.2
+ */
 public class CapteurObstacleTest {
     @Mock
     private CapteurObstacle capteurObstacle;

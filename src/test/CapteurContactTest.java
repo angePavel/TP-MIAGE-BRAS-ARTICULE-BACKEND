@@ -13,6 +13,11 @@ import captors.CapteurContact;
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3TouchSensor;
 
+/**
+ * @author M1 MIAGE Alternance : Ange-pavel ISHIMWE, MEUNIER Matthias, Florette
+ *         DIEU, Gaëtan PELLERIN , Liam RIGBY
+ * @version 2.2
+ */
 public class CapteurContactTest {
     @Mock
     private CapteurContact capteurContact;

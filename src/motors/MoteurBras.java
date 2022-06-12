@@ -8,15 +8,16 @@ import lejos.hardware.port.Port;
  * Classe Moteur héritée de EV3LargeRegulatedMotor. Elle est utile pour le
  * moteur de rotation et le moteur du bras
  * 
- * @author M1 MIAGE Alternance : AUGEREAU Yan, CELLIER ALexandre, MEUNIER
- *         Matthias & PERRET Pierre-Yves
- * @version 2.1
+ * @author M1 MIAGE Alternance : Ange-pavel ISHIMWE, MEUNIER Matthias, Florette
+ *         DIEU, Gaëtan PELLERIN , Liam RIGBY
+ * @version 2.2
  */
 public class MoteurBras {
 
     public int                    positionActuelle;
     public int                    angleMax;
     public EV3LargeRegulatedMotor motor;
+    private static int            SPEED = 200;
 
     /**
      * Constructeur pour le moteur (Rotation ou Bras)
@@ -79,7 +80,7 @@ public class MoteurBras {
      */
     public void initialisationRotation( CapteurContact capteur ) {
         try {
-            this.motor.setSpeed( 200 );
+            this.motor.setSpeed( SPEED );
             boolean enfonce = false;
             if ( capteur.contact() == false ) {
                 while ( enfonce == false ) {

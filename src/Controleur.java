@@ -18,13 +18,14 @@ import lejos.remote.nxt.BTConnector;
 import lejos.remote.nxt.NXTConnection;
 import motors.MoteurBras;
 import motors.MoteurPince;
+import utils.couleurEnum;
 
 /**
  * Classe Controleur
  * 
- * @author M1 MIAGE Alternance : AUGEREAU Yan, CELLIER ALexandre, MEUNIER
- *         Matthias & PERRET Pierre-Yves
- * @version 2.1
+ * @author M1 MIAGE Alternance : Ange-pavel ISHIMWE, MEUNIER Matthias, Florette
+ *         DIEU, Gaëtan PELLERIN , Liam RIGBY
+ * @version 2.2
  */
 public class Controleur {
 
@@ -217,19 +218,18 @@ public class Controleur {
      */
     public void ReceptionCouleur( MoteurBras mr, MoteurBras mb, MoteurPince mp, CapteurContact cr, CapteurContact cb,
             int positionD, int positionF, String couleur ) {
-        if ( couleur == "vert" ) {
-            positionF = 120;
+        if ( couleur == couleurEnum.vert.toString() ) {
             // Voir explication pour les informations sur les couleurs dans le
             // dossier de Programmation
-        } else if ( couleur == "jaune" ) {
+        } else if ( couleur == couleurEnum.jaune.toString() ) {
             positionF = 240;
             // Voir explication pour les informations sur les couleurs dans le
             // dossier de Programmation
-        } else if ( couleur == "rouge" ) {
+        } else if ( couleur == couleurEnum.rouge.toString() ) {
             positionF = 360;
             // Voir explication pour les informations sur les couleurs dans le
             // dossier de Programmation
-        } else if ( couleur == "bleu" ) {
+        } else if ( couleur == couleurEnum.bleu.toString() ) {
             positionF = 480;
             // Voir explication pour les informations sur les couleurs dans le
             // dossier de Programmation

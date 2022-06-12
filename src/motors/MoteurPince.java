@@ -1,21 +1,20 @@
 package motors;
 
-import etats.EnumEtatPince;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.Port;
+import utils.EnumEtatPince;
 
 /**
- * Classe MoteurPince héritée de EV3MediumRegulatedMotor. Elle est utilisée pour
- * le moteur de la pince du robot.
- * 
- * @author yanaugereau
- * @version 2.1
+ * @author M1 MIAGE Alternance : Ange-pavel ISHIMWE, MEUNIER Matthias, Florette
+ *         DIEU, Gaëtan PELLERIN , Liam RIGBY
+ * @version 2.2
  */
 public class MoteurPince {
 
     public EnumEtatPince           etat;
     public int                     position;
     public EV3MediumRegulatedMotor motor;
+    private static final int       ANGLE = 100;
 
     /**
      * Constructeur pour le moteur de la pince
@@ -34,9 +33,8 @@ public class MoteurPince {
      * Cette méthode permet de fermer la pince du robot
      */
     public void fermer() {
-        int angle = 100;
         if ( this.etat == EnumEtatPince.ouverte ) {
-            this.motor.rotate( angle );
+            this.motor.rotate( ANGLE );
             this.etat = EnumEtatPince.fermee;
             this.motor.stop();
         }
@@ -46,9 +44,9 @@ public class MoteurPince {
      * Cette méthode permet d'ouvrir la pince du robot
      */
     public void ouvrir() {
-        int angle = 100;
+
         if ( this.etat == EnumEtatPince.fermee ) {
-            this.motor.rotate( -angle );
+            this.motor.rotate( -ANGLE );
             this.etat = EnumEtatPince.ouverte;
             this.motor.stop();
         }

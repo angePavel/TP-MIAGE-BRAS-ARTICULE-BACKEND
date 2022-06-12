@@ -8,10 +8,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import etats.EnumEtatPince;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import motors.MoteurPince;
+import utils.EnumEtatPince;
 
+/**
+ * @author M1 MIAGE Alternance : Ange-pavel ISHIMWE, MEUNIER Matthias, Florette
+ *         DIEU, Gaëtan PELLERIN , Liam RIGBY
+ * @version 2.2
+ */
 public class MoteurPinceTest {
 
     @Mock
