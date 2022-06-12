@@ -195,6 +195,137 @@ public class Controleur {
     }
 
     /**
+     * Cette méthode permet d'envoyer une couleur selon la couleur reçu et
+     * d'envoyer sur le point d'envoi.
+     * 
+     * @param mr
+     *            Moteur de rotation
+     * @param mb
+     *            Moteur du bras
+     * @param mp
+     *            Moteur de la pince
+     * @param cr
+     *            Capteur de rotation
+     * @param cb
+     *            Capteur du bras
+     * @param positionD
+     *            position de départ l'objet à chercher
+     * @param positionF
+     *            Future position de l'objet
+     * @param couleur
+     *            information de la couleur à déplacer
+     */
+    public void ReceptionCouleur( MoteurBras mr, MoteurBras mb, MoteurPince mp, CapteurContact cr, CapteurContact cb,
+            int positionD, int positionF, String couleur ) {
+        if ( couleur == "vert" ) {
+            positionF = 120;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else if ( couleur == "jaune" ) {
+            positionF = 240;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else if ( couleur == "rouge" ) {
+            positionF = 360;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else if ( couleur == "bleu" ) {
+            positionF = 480;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else {
+            positionF = 0;
+            // Si on ne reçoit pas d'information on envoie le bac d'envoi vers
+            // la position Réception
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        }
+        positionD = 615;
+        // Voir explication pour les informations sur les couleurs dans le
+        // dossier de Programmation
+        if ( positionD != 615 ) {
+            mr.pivoter( positionD );
+            mb.baisserBras( 270 );
+            mp.fermer();
+            mb.initialisationBras( cb );
+            // On va chercher l'objet en positionD
+
+            mr.pivoter( positionF );
+            mb.baisserBras( 270 );
+            mp.ouvrir();
+            mb.initialisationBras( cb );
+            // On envoie la pièce sur la zone de Réception en positionF
+        }
+
+        this.initialisation( mr, mb, mp, cr, cb );
+    }
+
+    /**
+     * Cette méthode permet de Réceptionner une couleur. C'est à dire qu'on va
+     * réceptionner l'objet en position 365 et l'envoyer sur le bloc de couleur
+     * correspondant
+     * 
+     * @param mr
+     *            Moteur de rotation
+     * @param mb
+     *            Moteur du bras
+     * @param mp
+     *            Moteur de la pince
+     * @param cr
+     *            Capteur de rotation
+     * @param cb
+     *            Capteur du bras
+     * @param positionD
+     *            position de départ l'objet à chercher
+     * @param positionF
+     *            Future position de l'objet
+     * @param couleur
+     *            information de la couleur à déplacer
+     */
+    public void EnvoiCouleur( MoteurBras mr, MoteurBras mb, MoteurPince mp, CapteurContact cr, CapteurContact cb,
+            int positionD, int positionF, String couleur ) {
+        if ( couleur == "vert" ) {
+            positionD = 120;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else if ( couleur == "jaune" ) {
+            positionD = 240;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else if ( couleur == "rouge" ) {
+            positionD = 360;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else if ( couleur == "bleu" ) {
+            positionD = 480;
+            // Voir explication pour les informations sur les couleurs dans le
+            // dossier de Programmation
+        } else {
+            positionD = 615;
+            // Si on ne reçoie pas d'information, On déplace le bac de la zone
+            // réception vers la zone d'envoie
+        }
+        positionF = 0;
+        // Voir explication pour les informations sur les couleurs dans le
+        // dossier de Programmation
+        if ( positionD != 615 ) {
+            mr.pivoter( positionD );
+            mb.baisserBras( 270 );
+            mp.fermer();
+            mb.initialisationBras( cb );
+            // On va chercher l'objet en positionD
+
+            mr.pivoter( positionF );
+            mb.baisserBras( 270 );
+            mp.ouvrir();
+            mb.initialisationBras( cb );
+            // On envoie la pièce sur la zone d'envoie en positionF
+        }
+
+        this.initialisation( mr, mb, mp, cr, cb );
+    }
+
+    /**
      * Cette méthode permet de dépiler une pile de deux objets
      * 
      * @param mr
